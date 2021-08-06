@@ -1,0 +1,7 @@
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/install/strip.dir
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/edit_cache.dir
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/xq_svr_zigbee.dir
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/list_install_components.dir
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/install/local.dir
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/rebuild_cache.dir
+/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/install.dir
