@@ -1,7 +1,0 @@
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/install/strip.dir
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/edit_cache.dir
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/list_install_components.dir
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/xq_svr_comm_zigbee.dir
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/install/local.dir
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/rebuild_cache.dir
-/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/install.dir
