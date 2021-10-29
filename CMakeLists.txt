@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.2)
-SET (PROJECT_NAME "xq_svr_zigbee")
+SET (PROJECT_NAME "xq_svr_comm_zigbee")
 
 project (${PROJECT_NAME})
 

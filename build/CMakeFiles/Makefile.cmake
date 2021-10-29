@@ -114,5 +114,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/xq_svr_zigbee.dir/DependInfo.cmake"
+  "CMakeFiles/xq_svr_comm_zigbee.dir/DependInfo.cmake"
   )

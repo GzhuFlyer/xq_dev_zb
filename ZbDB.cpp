@@ -1,6 +1,7 @@
 // ***************************************************//
 
 #include "ZbDB.hpp"
+#include "syslog/XqLog.hpp"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ void ZigbeeDB::ShowDeviceMessage(void)
 	tempMacEndIt =m_zb_table.end();
 
 	cout << "======show all device relative message========" << endl;
+	XQ_LOG_INFO("======show all device relative message========");
 	while(tempMacIt != tempMacEndIt)
 	{
 		ST_VALUE_T::iterator showStateType;
@@ -20,6 +22,8 @@ void ZigbeeDB::ShowDeviceMessage(void)
 		showStateType = tempMacIt->second.begin();
 		cout << "\t====================================" << endl; 
 		cout << "\tMac=" << tempMacIt->first << endl;
+		XQ_LOG_INFO("\t====================================");
+		XQ_LOG_INFO("\tMac=%s", tempMacIt->first.c_str());
 		while(showStateType != tempMacIt->second.end())
 		{
 			cout << "\tstateType=" << showStateType->first << "\t";
@@ -27,6 +31,7 @@ void ZigbeeDB::ShowDeviceMessage(void)
 			showStateType++;
 		}
 		cout << "\t====================================" << endl; 
+		XQ_LOG_INFO("\t====================================");
 		tempMacIt++;
 	}
 
@@ -40,9 +45,11 @@ void ZigbeeDB::InsertDevTable(MAC_T mac,ST_T stateType,VALUE_T value)
 
     tableIt = m_zb_table.find(mac);
 	cout << "the mac is " << mac << endl; 
+	XQ_LOG_INFO("the mac is %s ",mac.c_str());
 	if(tableIt == m_zb_table.end())
     {
         cout << "no relative device store in m_zb_table ,start store " << endl;
+		XQ_LOG_INFO("no relative device store in m_zb_table ,start store ");
         temp_st_value.insert(pair<ST_T,VALUE_T>(stateType,value));
         m_zb_table.insert(pair<MAC_T,ST_VALUE_T>(mac,temp_st_value));
     }else{
@@ -60,7 +67,6 @@ std::string ZigbeeDB::GetValueByST(MAC_T mac,ST_T stateType){
 	tempMacIt = m_zb_table.find(mac);
 	std::string retVal = "";
 
-	cout << "======return device relative message========" << endl;
 	if(tempMacIt != m_zb_table.end())
 	{
 		ST_VALUE_T::iterator showStateType;
@@ -68,19 +74,16 @@ std::string ZigbeeDB::GetValueByST(MAC_T mac,ST_T stateType){
 		showStateType = tempMacIt->second.find(stateType);
 		if(showStateType != tempMacIt->second.end())
 		{
-			cout << "\tfind stateType=" << showStateType->first << "\t";
-			cout << "\tfind Value=" << showStateType->second << endl;
 			if(showStateType->first == stateType)
 			{
 				retVal += showStateType->second;
 				cout << "retVal=" << retVal << endl;
+				XQ_LOG_INFO("retVal=%s",retVal);
 				return retVal;
 			}
 			showStateType++;
 		}
-		cout << "\t====================================" << endl; 
 	}else
-		cout << "nothing to find" << "=========" << endl;
 	return retVal;
 }
 
@@ -89,7 +92,6 @@ std::string ZigbeeDB::GetValueByMac(MAC_T mac){
 	tempMacIt = m_zb_table.find(mac);
 	std::string retVal = "";
 
-	cout << "======return device relative message========" << endl;
 	if(tempMacIt != m_zb_table.end())
 	{
 		ST_VALUE_T::iterator showStateType;
@@ -97,8 +99,6 @@ std::string ZigbeeDB::GetValueByMac(MAC_T mac){
 		showStateType = tempMacIt->second.begin();
 		while(showStateType != tempMacIt->second.end())
 		{
-			cout << "\tfind stateType=" << showStateType->first << "\t";
-			cout << "\tfind Value=" << showStateType->second << endl;
 			temp_retValue += "{\"stateType\":\"";
 			temp_retValue += showStateType->first;
 			temp_retValue += "\",";
@@ -110,7 +110,6 @@ std::string ZigbeeDB::GetValueByMac(MAC_T mac){
 				temp_retValue += ',';
 		}
 		retVal = temp_retValue;
-		cout << "\t====================================" << endl; 
 	}
 	return retVal;
 }
@@ -153,18 +152,3 @@ void ZigbeeDB::SetDevLatestTime(MAC_T mac)
 	m_devStatus.insert(pair<MAC_T,STATUS_T>(mac,ONLINE));
 }
 
-//test demo
-// int main(int argc, char *argv[])
-// {
-
-//     ZigbeeDB& instance_1 = ZigbeeDB::get_instance();
-
-
-
-// 	instance_1.InsertDevTable("5C0272FFFED8B570","0201","{\"BatVoltage\":\"2.8\",\"BatPercentage\":\"69\"}");
-// 	instance_1.InsertDevTable("5C0272FFFED8B570","0202","{\"BatPercentage\":\"69\"}");
-//     instance_1.ShowDeviceMessage();
-
-	
-//     return 0;
-// }

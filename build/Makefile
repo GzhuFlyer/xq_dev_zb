@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/frank/workspace/xq_south_develop/develop/xq_dev_zb
+CMAKE_SOURCE_DIR = /home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build
+CMAKE_BINARY_DIR = /home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles /home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles /home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -157,17 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named xq_svr_zigbee
+# Target rules for targets named xq_svr_comm_zigbee
 
 # Build rule for target.
-xq_svr_zigbee: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 xq_svr_zigbee
-.PHONY : xq_svr_zigbee
+xq_svr_comm_zigbee: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 xq_svr_comm_zigbee
+.PHONY : xq_svr_comm_zigbee
 
 # fast build rule for target.
-xq_svr_zigbee/fast:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/build
-.PHONY : xq_svr_zigbee/fast
+xq_svr_comm_zigbee/fast:
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/build
+.PHONY : xq_svr_comm_zigbee/fast
 
 ZB_data_processor.o: ZB_data_processor.cpp.o
 
@@ -175,7 +175,7 @@ ZB_data_processor.o: ZB_data_processor.cpp.o
 
 # target to build an object file
 ZB_data_processor.cpp.o:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/ZB_data_processor.cpp.o
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/ZB_data_processor.cpp.o
 .PHONY : ZB_data_processor.cpp.o
 
 ZB_data_processor.i: ZB_data_processor.cpp.i
@@ -184,7 +184,7 @@ ZB_data_processor.i: ZB_data_processor.cpp.i
 
 # target to preprocess a source file
 ZB_data_processor.cpp.i:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/ZB_data_processor.cpp.i
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/ZB_data_processor.cpp.i
 .PHONY : ZB_data_processor.cpp.i
 
 ZB_data_processor.s: ZB_data_processor.cpp.s
@@ -193,7 +193,7 @@ ZB_data_processor.s: ZB_data_processor.cpp.s
 
 # target to generate assembly for a file
 ZB_data_processor.cpp.s:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/ZB_data_processor.cpp.s
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/ZB_data_processor.cpp.s
 .PHONY : ZB_data_processor.cpp.s
 
 ZbDB.o: ZbDB.cpp.o
@@ -202,7 +202,7 @@ ZbDB.o: ZbDB.cpp.o
 
 # target to build an object file
 ZbDB.cpp.o:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/ZbDB.cpp.o
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/ZbDB.cpp.o
 .PHONY : ZbDB.cpp.o
 
 ZbDB.i: ZbDB.cpp.i
@@ -211,7 +211,7 @@ ZbDB.i: ZbDB.cpp.i
 
 # target to preprocess a source file
 ZbDB.cpp.i:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/ZbDB.cpp.i
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/ZbDB.cpp.i
 .PHONY : ZbDB.cpp.i
 
 ZbDB.s: ZbDB.cpp.s
@@ -220,7 +220,7 @@ ZbDB.s: ZbDB.cpp.s
 
 # target to generate assembly for a file
 ZbDB.cpp.s:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/ZbDB.cpp.s
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/ZbDB.cpp.s
 .PHONY : ZbDB.cpp.s
 
 client_data_process.o: client_data_process.cpp.o
@@ -229,7 +229,7 @@ client_data_process.o: client_data_process.cpp.o
 
 # target to build an object file
 client_data_process.cpp.o:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/client_data_process.cpp.o
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/client_data_process.cpp.o
 .PHONY : client_data_process.cpp.o
 
 client_data_process.i: client_data_process.cpp.i
@@ -238,7 +238,7 @@ client_data_process.i: client_data_process.cpp.i
 
 # target to preprocess a source file
 client_data_process.cpp.i:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/client_data_process.cpp.i
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/client_data_process.cpp.i
 .PHONY : client_data_process.cpp.i
 
 client_data_process.s: client_data_process.cpp.s
@@ -247,7 +247,7 @@ client_data_process.s: client_data_process.cpp.s
 
 # target to generate assembly for a file
 client_data_process.cpp.s:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/client_data_process.cpp.s
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/client_data_process.cpp.s
 .PHONY : client_data_process.cpp.s
 
 main.o: main.cpp.o
@@ -256,7 +256,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -265,7 +265,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -274,7 +274,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 server.o: server.cpp.o
@@ -283,7 +283,7 @@ server.o: server.cpp.o
 
 # target to build an object file
 server.cpp.o:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/server.cpp.o
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/server.cpp.o
 .PHONY : server.cpp.o
 
 server.i: server.cpp.i
@@ -292,7 +292,7 @@ server.i: server.cpp.i
 
 # target to preprocess a source file
 server.cpp.i:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/server.cpp.i
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/server.cpp.i
 .PHONY : server.cpp.i
 
 server.s: server.cpp.s
@@ -301,7 +301,7 @@ server.s: server.cpp.s
 
 # target to generate assembly for a file
 server.cpp.s:
-	$(MAKE) -f CMakeFiles/xq_svr_zigbee.dir/build.make CMakeFiles/xq_svr_zigbee.dir/server.cpp.s
+	$(MAKE) -f CMakeFiles/xq_svr_comm_zigbee.dir/build.make CMakeFiles/xq_svr_comm_zigbee.dir/server.cpp.s
 .PHONY : server.cpp.s
 
 # Help Target
@@ -312,8 +312,8 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... edit_cache"
-	@echo "... xq_svr_zigbee"
 	@echo "... list_install_components"
+	@echo "... xq_svr_comm_zigbee"
 	@echo "... install/local"
 	@echo "... rebuild_cache"
 	@echo "... install"

@@ -1,3 +1,12 @@
+/*
+ * @Descripttion: 
+ * @version: V1.0
+ * @Author: Zongwu Fang
+ * @Date: 2021-10-19 17:26:59
+ * @LastEditors: Zongwu Fang
+ * @LastEditTime: 2021-10-25 11:44:11
+ * @mail: gzhuflyer@foxmail.com
+ */
 #ifndef ZB_DB_HPP
 #define ZB_DB_HPP
 
@@ -28,7 +37,8 @@ class ZigbeeDB
 {
 public:
     ~ZigbeeDB(){
-        std::cout<<"close ZigbeeDB "<<std::endl;
+        // std::cout<<"close ZigbeeDB "<<std::endl;
+        printf("close ZigbeeDB ");
     }
     ZigbeeDB(const ZigbeeDB&)=delete;
     ZigbeeDB& operator=(const ZigbeeDB&)=delete;

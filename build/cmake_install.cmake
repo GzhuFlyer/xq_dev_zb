@@ -1,8 +1,8 @@
-# Install script for directory: /home/frank/workspace/xq_south_develop/develop/xq_dev_zb
+# Install script for directory: /home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/frank/workspace/xq_south_develop/develop/host")
+  set(CMAKE_INSTALL_PREFIX "/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/host")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,21 +38,21 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee"
-         RPATH "/home/frank/workspace/xq_south_develop/develop/host/lib/")
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee"
+         RPATH "/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/host/lib/")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/xq_svr_zigbee")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/xq_svr_comm_zigbee")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee")
     file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee"
-         OLD_RPATH "/home/frank/workspace/xq_south_develop/develop/host/lib:"
-         NEW_RPATH "/home/frank/workspace/xq_south_develop/develop/host/lib/")
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee"
+         OLD_RPATH "/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/host/lib:"
+         NEW_RPATH "/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/host/lib/")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_zigbee")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/xq_svr_comm_zigbee")
     endif()
   endif()
 endif()
@@ -65,5 +65,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/frank/workspace/xq_south_develop/develop/xq_dev_zb/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/frank/workspace/xq_docker_001/docker/develop_docker/v1.0/xq_svr_comm_zigbee/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

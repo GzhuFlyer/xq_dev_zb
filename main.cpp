@@ -8,36 +8,63 @@
 #include <unistd.h>
 #include <string.h>
 #include <thread>
-#include<sys/types.h>
+#include <sys/types.h>
 #include <sys/wait.h>
 
-#include "client_data_process.hpp"
+#include "jsonxx/json.hpp"
+#include "zmq/SyncClient.hpp"
 #include "zmq/SyncService.hpp"
+#include "zmq/PubSub.hpp"
+#include "config/ConfigParse.hpp"
+#include "service_regist/ServiceRegist.hpp"
+#include "threadpool/ThreadPool.hpp"
+#include "lua/LuaCaller.hpp"
+#include "common/Common.hpp"
+
+
+#include "client_data_process.hpp"
 #include "ZB_data_processor.hpp"
-#include "syslog/XqLog.hpp"
+
+
 
 using namespace std;
 using namespace xq;
 
+#define SUCCESS  true
+#define FAIL     false
 #define BUF_SIZE 1024
-char    *p_map;
-int g_buff_fd[2];
+
+int*          g_p_map;
+int           g_buff_fd[2];
+string        g_svr_ip;
+string        g_svr_name = "xq_svr_comm_zigbee";
+
+unsigned int g_portArray[3];
+
 static void updateAllDevStatus();
-char * g_msg = "start run zb comm server";
+static bool getIpPort();
+void UploadGetZmqMsg(const std::string &strRecvMsg, std::string &responseData, void *privateData);
+
 
 static void handle_sigchld(int sig)
 {
-    //wait(NULL);   //只能捕获一个信号
-    //循环调用，捕获信号，直至进程退出
+
     while (waitpid(-1,NULL,WNOHANG) > 0);
 }
 
 int main()
 {
-    // signal(SIGCHLD,handle_sigchld); 
-    XQ_LOG_INFO("%s\n",g_msg );
-    // p_map = (char *)mmap(NULL, BUF_SIZE, PROT_READ | PROT_WRITE,
-    //         MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    signal(SIGCHLD,handle_sigchld); 
+
+    if(FAIL == getIpPort())
+    {
+        ERR_EXIT("getIpPort");
+    }else
+    {
+        printf("Regist local returnback info: %s : %d : %d : %d ", g_svr_ip.c_str(), g_portArray[0], g_portArray[1], g_portArray[2]);
+        XQ_LOG_INFO("Regist local returnback info: %s : %d : %d : %d ", g_svr_ip.c_str(), g_portArray[0], g_portArray[1], g_portArray[2]);
+    }
+    
 
     if(-1 == pipe(g_buff_fd))
     {
@@ -50,35 +77,17 @@ int main()
         ERR_EXIT("fork");
     if(pid == 0) {
             close(g_buff_fd[0]);
-            // char * recvbuf = "hello world\n";
-            //  write(g_buff_fd[1],recvbuf,strlen(recvbuf)+1);
             startTcpServer();
     }else{
-        SyncService srv("127.0.0.1", 5555, &ZMQSyncServiceRecvCB, nullptr);
+        SyncService srv(g_svr_ip, g_portArray[0], &ZMQSyncServiceRecvCB, nullptr);
         thread th1(updateAllDevStatus);
         th1.detach();
-         close(g_buff_fd[1]);
+        close(g_buff_fd[1]);
         while(1){
-            // if(*(p_map+1023) != 1)
-            // {
-            //     continue;
-            // }
-            // *(p_map+1023) = 0;
-            // char *temp_p_map = p_map;
             char tempbuf[BUF_SIZE];
             char *temp_p_map = tempbuf;
             memset(tempbuf,0,sizeof(tempbuf));
-            std::cout << "....." << g_buff_fd[0] << endl;
             ssize_t s = read(g_buff_fd[0],tempbuf,sizeof(tempbuf));
-            printf("s===>%ld\n",s);
-            std::cout << "*************----->" << tempbuf << endl;
-
-            // memset(tempbuf,0,sizeof(tempbuf));
-            // s = read(g_buff_fd[0],tempbuf,sizeof(tempbuf));
-            // printf("s===>%ld\n",s);
-            // std::cout << "---------------->........" << tempbuf << endl;
-
-            // if (0)
             for( int i=0,j=0;;)
             {
                 static int k=0;
@@ -89,10 +98,11 @@ int main()
                     char tempBuf[1024];
                     memset(tempBuf,0,sizeof(tempBuf));
                     memcpy(tempBuf,&temp_p_map[k],i-k+1);
-                    std::cout << "tempBuf=" << tempBuf << endl;
-                    StoreDataInZbDB(tempBuf);
-                    k=i+1;
-                                   
+                    // std::cout << "tempBuf=" << tempBuf << endl;
+                    std::cout << "temp_p_map["<<k<<"]="<<temp_p_map[k]<<std::endl;
+                    if(0 != &temp_p_map[k])
+                        StoreDataInZbDB(tempBuf);
+                    k=i+1;          
                 }
                 i++;
                 if(temp_p_map[i]==0 || temp_p_map[i]=='\0')
@@ -103,6 +113,7 @@ int main()
             }
         }
     }
+    xq::SyncService* m_pSyncService = new xq::SyncService(g_svr_ip, g_portArray[0], UploadGetZmqMsg, (void *)nullptr);
 }
 
 static void updateAllDevStatus()
@@ -112,5 +123,63 @@ static void updateAllDevStatus()
     {
         myZb.UpdateDevStatus();
     }
-    
+}
+bool isJsonBodyLegal(jsonxx::json jObj)
+{
+    if (jObj["msgId"] != nullptr && jObj["msgId"].is_string() &&
+        jObj["type"] != nullptr && jObj["type"].is_string() &&
+        jObj["action"] != nullptr && jObj["action"].is_string())
+    {
+        return true;
+    }
+    return false;
+}
+void UploadGetZmqMsg(const std::string &strRecvMsg, std::string &responseData, void *privateData)
+{
+    if (!privateData)
+    {
+        XQ_LOG_ERR("privateData is null!", "");
+        return;
+    }
+    std::string strMsgId;
+    std::string strAction;
+    XQ_LOG_DEBUG("收到上行服务请求的信息内容: %s ", strRecvMsg.c_str());
+    printf("come to here\n");
+    static uint64_t recv_count=0; recv_count++;
+    printf("recv_count:%ld  ------%s\n",recv_count,strRecvMsg.c_str());
+    jsonxx::json jsonParese = jsonxx::json::parse(strRecvMsg);
+    if (isJsonBodyLegal(jsonParese))
+    {
+        strMsgId = jsonParese["msgId"].as_string();
+        strAction = jsonParese["action"].as_string();
+        jsonxx::json respJson = {
+            {"msgId", strMsgId},
+            {"type", "resp"},
+            {"action", strAction},
+            {"resultCode", 0}};
+        if (strAction == "heartbeat")
+        {
+            responseData = respJson.dump();
+        }
+    }
+    else
+    {
+        XQ_LOG_ERR("Parse recv json fail!", "");
+    }
+}
+
+static bool getIpPort()
+{
+    ServiceRegist *m_sServiceReg;
+    m_sServiceReg = new ServiceRegist();
+    for(int tryTimes=0; tryTimes < 30 ; tryTimes++)
+    {
+        if(FAIL == m_sServiceReg->Init())
+                continue;
+        if(FAIL == m_sServiceReg->Regist(g_svr_name, g_svr_ip, g_portArray[0], g_portArray[1], g_portArray[2])) 
+                continue;
+        if(SUCCESS ==  m_sServiceReg->BindNotify(g_svr_name))  
+                return SUCCESS; 
+    }
+    return FAIL;
 }
